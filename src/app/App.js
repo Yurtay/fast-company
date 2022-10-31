@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Users from "./components/users";
 import api from "./api";
 
@@ -7,8 +7,7 @@ function App() {
     useEffect(() => {
         api.users.fetchAll().then((data) => setUsers(data));
     }, []);
-    console.log(users)
-    
+   
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId));
     };
@@ -23,13 +22,17 @@ function App() {
         );
     };
     return (
-        <div>
+        <>
+        {users && (
+            <div>
             <Users
                 onDelete={handleDelete}
                 onToggleBookMark={handleToggleBookMark}
                 users={users}
             />
         </div>
+        )}
+        </>
     );
 }
 
