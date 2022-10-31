@@ -34,6 +34,20 @@ const Users = () => {
     setSelectedProf(item);
   };
 
+  const handleDelete = (userId) => {
+    setUsers(users.filter((user) => user._id !== userId));
+  };
+  const handleToggleBookMark = (id) => {
+    setUsers(
+      users.map((user) => {
+        if (user._id === id) {
+          return { ...user, bookmark: !user.bookmark };
+        }
+        return user;
+      })
+    );
+  };
+
   if (users) {
     const filteredUsers = selectedProf
       ? users.filter(
@@ -82,7 +96,12 @@ const Users = () => {
               </thead>
               <tbody>
                 {userCrop.map((user) => (
-                  <User key={user._id} {...user} />
+                  <User
+                    key={user._id}
+                    {...user}
+                    onDelete={handleDelete}
+                    onToggleBookMark={handleToggleBookMark}
+                  />
                 ))}
               </tbody>
             </table>
