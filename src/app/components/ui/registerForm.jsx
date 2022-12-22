@@ -29,7 +29,7 @@ const RegisterForm = () => {
       [target.name]: target.value,
     }));
   };
-
+  console.log(qualities);
   const validatorConfig = {
     email: {
       isRequired: {
